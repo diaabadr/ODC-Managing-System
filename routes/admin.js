@@ -7,6 +7,7 @@ const Suppliers = require("../Models/suppliers");
 const User = require("../Models/user");
 const admin_panel_controller = require("../controllers/admin-panel-controller");
 const students_data_controller = require("../controllers/students-data-controller");
+const courses_data_controller = require("../controllers/courses-data-controller");
 /* GET users listing. */
 
 // admin panel
@@ -28,8 +29,8 @@ router.post("/addskill", admin_panel_controller.add_skill);
 router.post("/addquiz", admin_panel_controller.add_quiz);
 
 // get students data
-router.post("/students",students_data_controller.students_data);
+router.post("/students", students_data_controller.students_data);
 
-
+router.post("/courses", courses_data_controller.courses_data);
 
 module.exports = router;

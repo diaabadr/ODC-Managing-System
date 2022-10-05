@@ -87,7 +87,7 @@ const get_available_quizes = async function () {
   return await Quizes.find({}, { name: 1, _id: 1 });
 };
 
-/*********************************************************** */
+/***************** money data for the main panel ***************************/
 const get_ODC_money_data = async function () {
     let suppliers_data = await Suppliers.find({}, { _id: 0, __v: 0 });
     let total_money_paid = 0;

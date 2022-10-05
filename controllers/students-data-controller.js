@@ -23,27 +23,27 @@ const students_data = async (req, res) => {
 };
 
 const filter = async function (skip, course, gender, limit) {
-    if (course !== "c" && gender !== "g") {
-      return await User.find({
-        $and: [{ type: "student" }, { courses: course }, { gender: gender }],
-      })
-        .skip(skip)
-        .limit(limit);
-    } else if (course === "c" && gender === "g") {
-      return await User.find({ type: "student" }).skip(skip).limit(limit);
-    } else if (course === "c") {
-      return await User.find({
-        $and: [{ type: "student" }, { gender: gender }],
-      })
-        .skip(skip)
-        .limit(limit);
-    } else {
-      return await User.find({
-        $and: [{ type: "student" }, { courses: course }],
-      })
-        .skip(skip)
-        .limit(limit);
-    }
-  };
+  if (course !== "c" && gender !== "g") {
+    return await User.find({
+      $and: [{ type: "student" }, { courses: course }, { gender: gender }],
+    })
+      .skip(skip)
+      .limit(limit);
+  } else if (course === "c" && gender === "g") {
+    return await User.find({ type: "student" }).skip(skip).limit(limit);
+  } else if (course === "c") {
+    return await User.find({
+      $and: [{ type: "student" }, { gender: gender }],
+    })
+      .skip(skip)
+      .limit(limit);
+  } else {
+    return await User.find({
+      $and: [{ type: "student" }, { courses: course }],
+    })
+      .skip(skip)
+      .limit(limit);
+  }
+};
 
 module.exports = { students_data };
