@@ -1,0 +1,1 @@
+courses.save((error, res) => console.log(res));
