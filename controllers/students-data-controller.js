@@ -61,8 +61,8 @@ const filter = async function (skip, course, gender, limit) {
 };
 
 const all_student_info = async (req, res) => {
-  const id = req.body;
-  const student = await User.findOne({ _id: id });
+  const {id} = req.body;
+  const student = await User.findOne({ _id: id }, { password: 0 });
   res.status(201).json(student);
 };
 

@@ -8,6 +8,8 @@ const User = require("../Models/user");
 const admin_panel_controller = require("../controllers/admin-panel-controller");
 const students_data_controller = require("../controllers/students-data-controller");
 const courses_data_controller = require("../controllers/courses-data-controller");
+const recommendation_system_controller = require("../controllers/recommendation-system-controller");
+
 /* GET users listing. */
 
 // admin panel
@@ -40,50 +42,8 @@ router.post("/courses", courses_data_controller.courses_data);
 // adding supplier
 router.post("/addsupplier", admin_panel_controller.add_supplier);
 
-router.post("/recommend", async (req, res) => {
-  let {p:page}=req.query;
-  if(!page)
-  page=1;
-  const limit=5;
-  const skip=(page-1)*limit;
-  const { skills } = req.body;
-  const recommended_students = await User.find({
-    $and: [{ type: "student" }, { skills: { $all: skills } }],
-  })
-    .sort({ skills: 1 }).skip(skip)
-    .limit(limit);
-  res.status(201).json(recommended_students);
-});
+router.post("/recommend",recommendation_system_controller.most_matching_students);
 
-
-const nodemailer = require('nodemailer');
-
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'diaabadr82@gmail.com',
-    pass: '01119322620'
-  }
-});
-
-router.post('/recommendstudent',async (req,res)=>{
-  const id=req.body.id;
-  const {email}=await User.findById(id,{email:1});
-  var mailOptions = {
-    from: 'diaabadr82@gmail.com',
-    to: 'diaabadr355@gmail.com',
-    subject: 'ODC Job',
-    text: 'That was easy!'
-  };
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-  
-    }
-  });
-  res.status(201).json(email);
-
-})
+router.post("/recommendstudent",recommendation_system_controller.recommend_student);
 
 module.exports = router;

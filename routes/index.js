@@ -17,20 +17,24 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/signup", async function (req, res) {
-  const { name, email, password, phone, gender } = req.body;
+  console.log(req.body);
+  const { name, email, password, phone, gender, military_status, address } =
+    req.body;
 
   try {
     const user = await User.create({
-      name: name,
-      email: email,
-      password: password,
-      phone: phone,
+      name,
+      email,
+      password,
+      phone,
       type: "student",
-      gender: gender,
+      gender,
+      military_status,
+      address,
     });
     const token = createToken(user._id);
     res.cookie("jwt", token, { maxAge: 3 * day });
-    res.status(201).json(user);
+    res.status(201).json(user.name);
   } catch (error) {
     if (error.code === 11000)
       res.status(404).json({ error: "This email already registered" });
@@ -55,6 +59,7 @@ router.post("/login", async (req, res) => {
     // const { page, size } = req.query;
     // console.log(page, size);
     if (user.type === "student") {
+      user.password=null;
       res.status(201).json(user);
     } else {
       res.redirect("/admin/" + user._id);

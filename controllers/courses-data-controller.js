@@ -1,8 +1,4 @@
 const Courses = require("../Models/courses");
-const Skills = require("../Models/skills");
-const Quizes = require("../Models/quiz");
-const Suppliers = require("../Models/suppliers");
-const User = require("../Models/user");
 
 const courses_data = async (req, res) => {
   const limit = 10;
