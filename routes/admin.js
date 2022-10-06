@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const jwt = require("jsonwebtoken");
 const Courses = require("../Models/courses");
 const Skills = require("../Models/skills");
 const Quizes = require("../Models/quiz");
@@ -42,8 +43,18 @@ router.post("/courses", courses_data_controller.courses_data);
 // adding supplier
 router.post("/addsupplier", admin_panel_controller.add_supplier);
 
-router.post("/recommend",recommendation_system_controller.most_matching_students);
+// recommend students based on some skills
+router.post(
+  "/recommend",
+  recommendation_system_controller.most_matching_students
+);
 
-router.post("/recommendstudent",recommendation_system_controller.recommend_student);
+// send mail to student about the job
+router.post(
+  "/recommendstudent",
+  recommendation_system_controller.recommend_student
+);
+
+
 
 module.exports = router;

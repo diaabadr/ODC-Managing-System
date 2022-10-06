@@ -1,7 +1,3 @@
-const Courses = require("../Models/courses");
-const Skills = require("../Models/skills");
-const Quizes = require("../Models/quiz");
-const Suppliers = require("../Models/suppliers");
 const User = require("../Models/user");
 
 const students_data = async (req, res) => {
