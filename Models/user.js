@@ -29,6 +29,12 @@ const user_schema = mongoose.Schema({
   state: {
     type: String,
   },
+  address:{
+    type:String,
+  },
+  military_status:{
+    type:String,
+  },
 });
 
 user_schema.post("save", (docs, next) => {

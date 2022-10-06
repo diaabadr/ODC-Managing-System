@@ -73,15 +73,26 @@ const add_skill = async (req, res) => {
   }
 };
 
-const add_quiz=async (req, res) => {
-    const quiz = new Quizes(req.body);
-    try {
-      const quiz_ = await quiz.save();
-      res.status(201).json(quiz_);
-    } catch (error) {
-      res.status(404).json({ error: error.message });
-    }
+const add_quiz = async (req, res) => {
+  const quiz = new Quizes(req.body);
+  try {
+    const quiz_ = await quiz.save();
+    res.status(201).json(quiz_);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
   }
+};
+
+const add_supplier = async (req, res) => {
+  const new_supplier = new Suppliers(req.body);
+
+  try {
+    const saved_supplier = await new_supplier.save();
+    res.status(201).json(saved_supplier);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
 
 const get_available_quizes = async function () {
   return await Quizes.find({}, { name: 1, _id: 1 });
@@ -89,93 +100,91 @@ const get_available_quizes = async function () {
 
 /***************** money data for the main panel ***************************/
 const get_ODC_money_data = async function () {
-    let suppliers_data = await Suppliers.find({}, { _id: 0, __v: 0 });
-    let total_money_paid = 0;
-    let total_amount = 0;
-  
-    suppliers_data.forEach((supplier, i) => {
-      // casting the object into javascript object
-      let supplier_obj = supplier.toObject();
-  
-      total_money_paid += supplier.money_paid;
-      total_amount += supplier.fees;
-  
-      supplier_obj.pay_percentage = calc_percentage(
-        supplier.money_paid,
-        supplier.fees
-      );
-  
-      suppliers_data[i] = supplier_obj;
-    });
-  
-    const paid_percentage = calc_percentage(total_money_paid, total_amount);
-    const to_pay = total_amount - total_money_paid;
-  
-    return [
-      suppliers_data,
-      {
-        total_amount,
-        total_money_paid,
-        paid_percentage,
-        to_pay,
-      },
-    ];
-  };
+  let suppliers_data = await Suppliers.find({}, { _id: 0, __v: 0 });
+  let total_money_paid = 0;
+  let total_amount = 0;
 
+  suppliers_data.forEach((supplier, i) => {
+    // casting the object into javascript object
+    let supplier_obj = supplier.toObject();
 
-  /*********************************************************** */
+    total_money_paid += supplier.money_paid;
+    total_amount += supplier.fees;
+
+    supplier_obj.pay_percentage = calc_percentage(
+      supplier.money_paid,
+      supplier.fees
+    );
+
+    suppliers_data[i] = supplier_obj;
+  });
+
+  const paid_percentage = calc_percentage(total_money_paid, total_amount);
+  const to_pay = total_amount - total_money_paid;
+
+  return [
+    suppliers_data,
+    {
+      total_amount,
+      total_money_paid,
+      paid_percentage,
+      to_pay,
+    },
+  ];
+};
+
+/*********************************************************** */
 const get_dashboard_data = async function () {
-    // money details object
-    const money_details = await get_ODC_money_data();
-  
-    //getting students number
-    const number_of_students = await User.find({ type: "student" }).count();
-    // getting courses number
-    const number_of_courses = await Courses.find({}).count();
-  
-    const shown_courses = await get_shown_courses_data();
-  
-    return shown_courses;
-  };
-  const get_shown_courses_data = async function () {
-    let shown_courses = await Courses.find(
-      { end_date: { $gt: new Date() } },
-      { name: 1, start_date: 1, end_date: 1, _id: 0, supplier: 1 }
-    ).limit(4);
-    let i = 0;
-    for (const course of shown_courses) {
-      let course_object = course.toObject();
-      if (new Date() >= course.end_date) course_object.progress = 100;
-      else {
-        let period = course.end_date - course.start_date;
-        const finished_period = new Date() - course.start_date;
-        course_object.progress = calc_percentage(finished_period, period);
-      }
-  
-      course_object.start_date = format_date(course.start_date);
-      course_object.end_date = format_date(course.end_date);
-  
-      const supplier_name = await Suppliers.findOne(
-        { _id: course.supplier },
-        { name: 1, _id: 0 }
-      );
-      course_object.supplier = supplier_name.name;
-      shown_courses[i] = course_object;
-      i++;
+  // money details object
+  const money_details = await get_ODC_money_data();
+
+  //getting students number
+  const number_of_students = await User.find({ type: "student" }).count();
+  // getting courses number
+  const number_of_courses = await Courses.find({}).count();
+
+  const shown_courses = await get_shown_courses_data();
+
+  return shown_courses;
+};
+const get_shown_courses_data = async function () {
+  let shown_courses = await Courses.find(
+    { end_date: { $gt: new Date() } },
+    { name: 1, start_date: 1, end_date: 1, _id: 0, supplier: 1 }
+  ).limit(4);
+  let i = 0;
+  for (const course of shown_courses) {
+    let course_object = course.toObject();
+    if (new Date() >= course.end_date) course_object.progress = 100;
+    else {
+      let period = course.end_date - course.start_date;
+      const finished_period = new Date() - course.start_date;
+      course_object.progress = calc_percentage(finished_period, period);
     }
-  
-    return shown_courses;
-  };
 
+    course_object.start_date = format_date(course.start_date);
+    course_object.end_date = format_date(course.end_date);
 
-  const format_date = function (date) {
-    return date.getUTCDate() + " " + month[date.getMonth()];
-  };
+    const supplier_name = await Suppliers.findOne(
+      { _id: course.supplier },
+      { name: 1, _id: 0 }
+    );
+    course_object.supplier = supplier_name.name;
+    shown_courses[i] = course_object;
+    i++;
+  }
 
-  /*********************************************************** */
+  return shown_courses;
+};
+
+const format_date = function (date) {
+  return date.getUTCDate() + " " + month[date.getMonth()];
+};
+
+/*********************************************************** */
 const calc_percentage = function (amount, total) {
-    return ((amount * 100) / total).toFixed(0);
-  };
+  return ((amount * 100) / total).toFixed(0);
+};
 
 module.exports = {
   new_courses_form,
@@ -183,5 +192,6 @@ module.exports = {
   new_skill_form,
   add_skill,
   main_page,
-  add_quiz
+  add_quiz,
+  add_supplier,
 };

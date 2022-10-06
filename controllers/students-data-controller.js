@@ -24,26 +24,46 @@ const students_data = async (req, res) => {
 
 const filter = async function (skip, course, gender, limit) {
   if (course !== "c" && gender !== "g") {
-    return await User.find({
-      $and: [{ type: "student" }, { courses: course }, { gender: gender }],
-    })
+    return await User.find(
+      {
+        $and: [{ type: "student" }, { courses: course }, { gender: gender }],
+      },
+      { name: 1, email: 1, _id: 0, courses: 1, phone: 1, gender: 1 }
+    )
       .skip(skip)
       .limit(limit);
   } else if (course === "c" && gender === "g") {
-    return await User.find({ type: "student" }).skip(skip).limit(limit);
+    return await User.find(
+      { type: "student" },
+      { name: 1, email: 1, courses: 1, phone: 1, gender: 1 }
+    )
+      .skip(skip)
+      .limit(limit);
   } else if (course === "c") {
-    return await User.find({
-      $and: [{ type: "student" }, { gender: gender }],
-    })
+    return await User.find(
+      {
+        $and: [{ type: "student" }, { gender: gender }],
+      },
+      { name: 1, email: 1, _id: 0, courses: 1, phone: 1, gender: 1 }
+    )
       .skip(skip)
       .limit(limit);
   } else {
-    return await User.find({
-      $and: [{ type: "student" }, { courses: course }],
-    })
+    return await User.find(
+      {
+        $and: [{ type: "student" }, { courses: course }],
+      },
+      { name: 1, email: 1, _id: 0, courses: 1, phone: 1, gender: 1 }
+    )
       .skip(skip)
       .limit(limit);
   }
 };
 
-module.exports = { students_data };
+const all_student_info = async (req, res) => {
+  const id = req.body;
+  const student = await User.findOne({ _id: id });
+  res.status(201).json(student);
+};
+
+module.exports = { students_data, all_student_info };
