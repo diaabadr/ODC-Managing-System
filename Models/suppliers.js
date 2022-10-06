@@ -5,6 +5,7 @@ const supplier_schema = mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique:true,
   },
   fees: {
     type: Number,

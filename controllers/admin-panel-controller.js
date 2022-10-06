@@ -3,10 +3,23 @@ const Skills = require("../Models/skills");
 const Quizes = require("../Models/quiz");
 const Suppliers = require("../Models/suppliers");
 const User = require("../Models/user");
-
+var month = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 const main_page = async function (req, res, next) {
   const dashboard_data = await get_dashboard_data();
-  res.status(201).json({ data: dashboard_data });
+  res.status(201).json(  dashboard_data );
 };
 
 const new_courses_form = async (req, res) => {
@@ -145,7 +158,7 @@ const get_dashboard_data = async function () {
 
   const shown_courses = await get_shown_courses_data();
 
-  return shown_courses;
+  return [money_details, number_of_students, number_of_courses, shown_courses];
 };
 const get_shown_courses_data = async function () {
   let shown_courses = await Courses.find(

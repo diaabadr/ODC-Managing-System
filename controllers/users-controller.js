@@ -32,9 +32,8 @@ const signup = async function (req, res) {
     else
       res.status(404).json({
         error:
-          error.errors.email?.properties.message ||
-          error.errors.password?.properties.message ||
-          "No errors",
+          error.errors?.email?.properties.message ||
+          error.errors?.password?.properties.message 
       });
   }
 };
