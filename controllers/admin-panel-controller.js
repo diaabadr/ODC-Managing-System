@@ -207,4 +207,5 @@ module.exports = {
   main_page,
   add_quiz,
   add_supplier,
+  calc_percentage
 };

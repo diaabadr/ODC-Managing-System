@@ -9,7 +9,6 @@ const requireAuth = function (req, res, next) {
       if (err) {
         res.redirect("/login");
       } else {
-        console.log(decodedToken);
         next();
       }
     });
@@ -18,4 +17,6 @@ const requireAuth = function (req, res, next) {
   }
 };
 
-module.exports = { requireAuth };
+
+
+module.exports = { requireAuth};

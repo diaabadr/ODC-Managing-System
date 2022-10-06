@@ -8,6 +8,10 @@ const quiz_schema = mongoose.Schema({
       answer: String,
     },
   ],
+  passing_percentage:{
+    type:Number,
+    required:true,
+  }
 });
 
 module.exports = mongoose.model("quiz", quiz_schema);

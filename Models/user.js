@@ -18,7 +18,7 @@ const user_schema = mongoose.Schema({
   },
   phone: { type: String },
   skills: [{ type: String }],
-  courses: [{ type:String }],
+  courses: [{ type: String, unique: true }],
   type: {
     type: String,
   },
@@ -29,11 +29,11 @@ const user_schema = mongoose.Schema({
   state: {
     type: String,
   },
-  address:{
-    type:String,
+  address: {
+    type: String,
   },
-  military_status:{
-    type:String,
+  military_status: {
+    type: String,
   },
 });
 

@@ -5,8 +5,6 @@ const createToken = function (id) {
   return jwt.sign({ id }, "ODC", { expiresIn: 3 * day });
 };
 
-
-
 const signup = async function (req, res) {
   const { name, email, password, phone, gender, military_status, address } =
     req.body;
@@ -24,7 +22,7 @@ const signup = async function (req, res) {
     });
     const token = createToken(user._id);
     res.cookie("jwt", token, { maxAge: 3 * day });
-    user.password=null;
+    user.password = null;
     res.status(201).json(user);
   } catch (error) {
     if (error.code === 11000)
@@ -33,28 +31,26 @@ const signup = async function (req, res) {
       res.status(404).json({
         error:
           error.errors?.email?.properties.message ||
-          error.errors?.password?.properties.message 
+          error.errors?.password?.properties.message,
       });
   }
 };
 
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.login(email, password);
+    const token = createToken(user._id);
+    res.cookie("jwt", token, { maxAge: 3 * day });
 
-const login=async (req, res) => {
-    const { email, password } = req.body;
-    try {
-      const user = await User.login(email, password);
-      const token = createToken(user._id);
-      res.cookie("jwt", token, { maxAge: 3 * day });
-  
-      if (user.type === "student") {
-        user.password = null;
-        res.status(201).json(user);
-      } else {
-        res.redirect("/admin/" + user._id);
-      }
-    } catch (errors) {
-      res.status(404).json({ error: errors.message });
+    if (user.type === "student") {
+      res.redirect("/student/" + user._id);
+    } else {
+      res.redirect("/admin/" + user._id);
     }
+  } catch (errors) {
+    res.status(404).json({ error: errors.message });
   }
+};
 
-module.exports={signup,login}
+module.exports = { signup, login };

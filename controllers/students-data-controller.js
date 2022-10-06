@@ -47,7 +47,7 @@ const filter = async function (skip, course, gender, limit) {
   } else {
     return await User.find(
       {
-        $and: [{ type: "student" }, { courses: course }],
+        $and: [{ type: "student" }, { courses: { $all: course } }],
       },
       { name: 1, email: 1, _id: 0, courses: 1, phone: 1, gender: 1 }
     )
@@ -57,7 +57,7 @@ const filter = async function (skip, course, gender, limit) {
 };
 
 const all_student_info = async (req, res) => {
-  const {id} = req.body;
+  const { id } = req.body;
   const student = await User.findOne({ _id: id }, { password: 0 });
   res.status(201).json(student);
 };
