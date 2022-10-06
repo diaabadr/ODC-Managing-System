@@ -15,44 +15,58 @@ const recommendation_system_controller = require("../controllers/recommendation-
 /* GET users listing. */
 
 // admin panel
-router.get("/:id",requireAuth, admin_panel_controller.main_page);
+router.get("/:id", requireAuth, admin_panel_controller.main_page);
 
 // get new course form data
-router.post("/newcourseform", requireAuth,admin_panel_controller.new_courses_form);
+router.post(
+  "/newcourseform",
+  requireAuth,
+  admin_panel_controller.new_courses_form
+);
 
 // feature add course
-router.post("/addcourse", admin_panel_controller.add_course);
+router.post("/addcourse", requireAuth, admin_panel_controller.add_course);
 
 // get new skill form data (quizes available and )
-router.post("/newskillform", admin_panel_controller.new_skill_form);
+router.post(
+  "/newskillform",
+  requireAuth,
+  admin_panel_controller.new_skill_form
+);
 
 // feature add new skill
-router.post("/addskill", admin_panel_controller.add_skill);
+router.post("/addskill", requireAuth, admin_panel_controller.add_skill);
 
 // feature add new quiz
-router.post("/addquiz", admin_panel_controller.add_quiz);
+router.post("/addquiz", requireAuth, admin_panel_controller.add_quiz);
 
 // get students info
-router.post("/students", students_data_controller.students_data);
+router.post("/students", requireAuth, students_data_controller.students_data);
 
 // get all info of the student
-router.post("/studentinfo", students_data_controller.all_student_info);
+router.post(
+  "/studentinfo",
+  requireAuth,
+  students_data_controller.all_student_info
+);
 
 // get courses info
-router.post("/courses", courses_data_controller.courses_data);
+router.post("/courses", requireAuth, courses_data_controller.courses_data);
 
 // adding supplier
-router.post("/addsupplier", admin_panel_controller.add_supplier);
+router.post("/addsupplier", requireAuth, admin_panel_controller.add_supplier);
 
 // recommend students based on some skills
 router.post(
   "/recommend",
+  requireAuth,
   recommendation_system_controller.most_matching_students
 );
 
 // send mail to student about the job
 router.post(
   "/recommendstudent",
+  requireAuth,
   recommendation_system_controller.recommend_student
 );
 
