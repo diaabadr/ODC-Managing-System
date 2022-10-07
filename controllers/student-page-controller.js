@@ -34,7 +34,6 @@ const enroll_course = async (req, res) => {
   res.status(201).json({
     course_id: course._id,
     quiz_name: course.Prerequisite_quiz,
-    type: "enrollcourse",
   });
 };
 
@@ -52,7 +51,6 @@ const submit_quiz = async (req, res) => {
   let { t: type } = req.query;
   if (skill) {
     const skill_quiz = await Skills.findOne({ name: skill }, { quiz: 1 });
-    console.log(skill_quiz);
     const quiz = await Quizes.findOne({ name: skill_quiz.quiz });
     quiz_id = quiz._id;
   }
@@ -101,7 +99,7 @@ const submit_quiz = async (req, res) => {
 };
 
 const add_skill= async (req, res) => {
-  const skills = await Skills.find({}, { name: 1 });
+  const skills = await Skills.find({}, { name: 1 ,quiz:1});
   res.status(201).json(skills);
 }
 module.exports = { main_page, enroll_course, take_quiz,submit_quiz,add_skill };
