@@ -1,7 +1,7 @@
 const Courses = require("../Models/courses");
 
 const courses_data = async (req, res) => {
-  const limit = 10;
+  const limit = 5;
   let { p: page } = req.query;
   if (!page) page = 1;
 

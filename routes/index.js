@@ -1,6 +1,5 @@
 var express = require("express");
 var router = express.Router();
-const User = require("../Models/user.js");
 const users_controller = require("../controllers/users-controller");
 const app = require("../app.js");
 
@@ -14,7 +13,6 @@ router.get("/", function (req, res, next) {
 router.get("/login", (req, res) => {
   res.status(201).json({ message: "please login" });
 });
-
 
 router.post("/signup", users_controller.signup);
 

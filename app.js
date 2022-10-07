@@ -40,7 +40,7 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 mongoose.connect(
-  "mongodb://127.0.0.1/ODC-System-database",
+  "mongodb://127.0.0.1/ODC-System-Database",
   { useNewUrlParser: true },
   (error) => {
     if (error) console.log(error);

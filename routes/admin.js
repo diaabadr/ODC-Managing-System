@@ -9,6 +9,8 @@ const {
   add_skill,
   add_quiz,
   add_supplier,
+  load_suppliers,
+  pay_supplier,
 } = require("../controllers/admin-panel-controller");
 const {
   students_data,
@@ -20,14 +22,12 @@ const {
   recommend_student,
 } = require("../controllers/recommendation-system-controller");
 
-
-
 /* GET users listing. */
 
 // admin panel
 router.get("/:id", requireAuth, main_page);
 
-// get new course form data
+// get new course form data (for prerequists quiz)
 router.post("/newcourseform", requireAuth, new_courses_form);
 
 // feature add course
@@ -53,6 +53,12 @@ router.post("/courses", requireAuth, courses_data);
 
 // adding supplier
 router.post("/addsupplier", requireAuth, add_supplier);
+
+const Suppliers = require("../Models/suppliers.js");
+router.post("/loadsuppliers", requireAuth, load_suppliers);
+
+// pay money for a supplier
+router.post("/paysupplier", requireAuth, pay_supplier);
 
 // recommend students based on some skills
 router.post("/recommend", requireAuth, most_matching_students);

@@ -16,18 +16,15 @@ const user_schema = mongoose.Schema({
     required: [true, "Please Enter the Password"],
     minlength: [8, "Min Length:8"],
   },
-  phone: { type: String },
+  phone: { type: String ,unique:true},
   skills: [{ type: String }],
-  courses: [{ type: String, unique: true }],
+  courses: [{ type: String }],
   type: {
     type: String,
   },
   gender: {
     type: String,
     required: true,
-  },
-  state: {
-    type: String,
   },
   address: {
     type: String,

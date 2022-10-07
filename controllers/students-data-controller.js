@@ -6,7 +6,7 @@ const students_data = async (req, res) => {
   if (course === undefined) course = "c";
   if (gender === undefined) gender = "g";
   // limit per page
-  const limit = 10;
+  const limit = 5;
   let { p: page } = req.query;
   if (!page) page = 1;
 

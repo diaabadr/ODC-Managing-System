@@ -8,7 +8,7 @@ const createToken = function (id) {
 const signup = async function (req, res) {
   const { name, email, password, phone, gender, military_status, address } =
     req.body;
-
+    console.log({name, email, password, phone, gender, military_status, address} );
   try {
     const user = await User.create({
       name,
@@ -23,8 +23,9 @@ const signup = async function (req, res) {
     const token = createToken(user._id);
     res.cookie("jwt", token, { maxAge: 3 * day });
     user.password = null;
-    res.status(201).json(user);
+    res.redirect('/login')
   } catch (error) {
+    console.log(error);
     if (error.code === 11000)
       res.status(404).json({ error: "This email already registered" });
     else

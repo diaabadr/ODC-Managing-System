@@ -7,6 +7,7 @@ const {
   submit_quiz,
   add_skill,
 } = require("../controllers/student-page-controller");
+
 const { requireAuth } = require("../middleware/auth");
 
 /* GET users listing. */

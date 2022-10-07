@@ -19,7 +19,7 @@ var month = [
 ];
 const main_page = async function (req, res, next) {
   const dashboard_data = await get_dashboard_data();
-  res.status(201).json(  dashboard_data );
+  res.status(201).json(dashboard_data);
 };
 
 const new_courses_form = async (req, res) => {
@@ -132,7 +132,8 @@ const get_ODC_money_data = async function () {
     suppliers_data[i] = supplier_obj;
   });
 
-  const paid_percentage = calc_percentage(total_money_paid, total_amount);
+  let paid_percentage = calc_percentage(total_money_paid, total_amount);
+  if (isNaN(paid_percentage)) paid_percentage = 0;
   const to_pay = total_amount - total_money_paid;
 
   return [
@@ -199,6 +200,21 @@ const calc_percentage = function (amount, total) {
   return ((amount * 100) / total).toFixed(0);
 };
 
+const load_suppliers = async (req, res) => {
+  const suppliers = await Suppliers.find({}, { name: 1 });
+  res.status(201).json(suppliers);
+};
+
+const pay_supplier= async (req, res) => {
+  const { id, amount } = req.body;
+  const supplier = await Suppliers.findById(id);
+  const money = supplier.money_paid + amount;
+  const updated_supplier = await Suppliers.updateOne(
+    { _id: id },
+    { $set: { money_paid: money } }
+  );
+  res.redirect('/admin/'+id);
+}
 module.exports = {
   new_courses_form,
   add_course,
@@ -207,5 +223,7 @@ module.exports = {
   main_page,
   add_quiz,
   add_supplier,
-  calc_percentage
+  calc_percentage,
+  load_suppliers,
+  pay_supplier
 };

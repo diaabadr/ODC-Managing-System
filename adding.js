@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  "mongodb://127.0.0.1/ODC-System-database",
+  "mongodb://127.0.0.1/ODC-System-Database",
   { useNewUrlParser: true },
   (error) => {
     if (error) console.log(error);
@@ -9,7 +9,7 @@ mongoose.connect(
   }
 );
 
-const Suppliers = require("./Models/suppliers");
+
 
 // const sup = [
 //   new Suppliers({
@@ -36,24 +36,26 @@ const Suppliers = require("./Models/suppliers");
 // });
 
 const users = require("./Models/user");
-users.updateOne(
-  { name: "diaa" },
-  { $push: { courses: "deep learning" } }
-)
+// users.updateOne(
+//   { name: "diaa" },
+//   { $push: { courses: "deep learning" } }
+// )
 const user = new users({
   name: "Diaa Badr",
   password: "diaa1234",
   email: "diaabadr82@gmail.com",
   gender: "male",
   type: "admin",
+  address:"Gize",
+  phone:"01098157522",
 });
 
-// user.save((error, res) => {
-//  if(error)
-//  console.log(error)
-//  else
-//  console.log(res);
-// });
+user.save((error, res) => {
+ if(error)
+ console.log(error)
+ else
+ console.log(res);
+});
 // const date = new Date();
 // date.setMonth(date.getMonth() + 1);
 // console.log(date);
