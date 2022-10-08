@@ -65,17 +65,18 @@ const submit_quiz = async (req, res) => {
       name: 0,
       _id: 0,
     });
-  let grade = 0;
-  for (const ans of right_answers) {
-    const student_answer = student_answers_map.get(ans._id.toString());
-    if (student_answer === ans.answer) grade++;
+  if (right_answers) {
+    let grade = 0;
+    for (const ans of right_answers) {
+      const student_answer = student_answers_map.get(ans._id.toString());
+      if (student_answer === ans.answer) grade++;
+    }
+    const quiz_result = calc_percentage(grade, right_answers.length);
+    if (quiz_result < passing_percentage) {
+      res.status(201).json({ message: "Failed to pass the exam" });
+      return;
+    }
   }
-  const quiz_result = calc_percentage(grade, right_answers.length);
-  if (quiz_result < passing_percentage) {
-    res.status(201).json({ message: "Failed to pass the exam" });
-    return;
-  }
-
   const token = req.cookies.jwt;
   const decoded = await jwt.verify(token, "ODC");
   const userId = decoded.id;
@@ -98,8 +99,14 @@ const submit_quiz = async (req, res) => {
   }
 };
 
-const add_skill= async (req, res) => {
-  const skills = await Skills.find({}, { name: 1 ,quiz:1});
+const add_skill = async (req, res) => {
+  const skills = await Skills.find({}, { name: 1, quiz: 1 });
   res.status(201).json(skills);
-}
-module.exports = { main_page, enroll_course, take_quiz,submit_quiz,add_skill };
+};
+module.exports = {
+  main_page,
+  enroll_course,
+  take_quiz,
+  submit_quiz,
+  add_skill,
+};

@@ -54,7 +54,7 @@ router.post("/courses", requireAuth, courses_data);
 // adding supplier
 router.post("/addsupplier", requireAuth, add_supplier);
 
-const Suppliers = require("../Models/suppliers.js");
+// form for suppliers
 router.post("/loadsuppliers", requireAuth, load_suppliers);
 
 // pay money for a supplier

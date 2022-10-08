@@ -36,6 +36,7 @@ const filter = async function (skip, course, gender, limit) {
       .skip(skip)
       .limit(limit);
   } else if (course === "c") {
+    
     return await User.find(
       {
         $and: [{ type: "student" }, { gender: gender }],
@@ -45,6 +46,7 @@ const filter = async function (skip, course, gender, limit) {
       .skip(skip)
       .limit(limit);
   } else {
+    
     return await User.find(
       {
         $and: [{ type: "student" }, { courses: { $all: course } }],
