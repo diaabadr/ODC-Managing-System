@@ -15,11 +15,9 @@
   <p align="center">
   Website for Managing Orange Digital Center Courses
 
-    <br />
-    <br />
-    ·
+
     <a href="https://github.com/diaabadr/ODC-Managing-Website/issues">Report Bug</a>
-    ·
+    
     <a href="https://github.com/diaabadr/ODC-Managing-Website/issues">Request Feature</a>
   </p>
 </div>
