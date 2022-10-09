@@ -16,9 +16,12 @@
   Website for Managing Orange Digital Center Courses
 
 <br />
+    <br />
     <a href="https://github.com/diaabadr/ODC-Managing-Website/issues">Report Bug</a>
     <br />
+    <br />
     <a href="https://github.com/diaabadr/ODC-Managing-Website/issues">Request Feature</a>
+    <br />
   </p>
 </div>
 
@@ -62,12 +65,6 @@ This interface gives the Student these features.
 
 
 
-<!-- CONTRIBUTING -->
-
-##  Collaborators 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
 <table>
 
    
