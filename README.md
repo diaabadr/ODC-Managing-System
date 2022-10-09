@@ -19,22 +19,15 @@
     <br />
     <br />
     ·
-    <a href="https://github.com/diaabadr/ICU-Managing-website/issues">Report Bug</a>
+    <a href="https://github.com/diaabadr/ODC-Managing-Website/issues">Report Bug</a>
     ·
-    <a href="https://github.com/diaabadr/ICU-Managing-website/issues">Request Feature</a>
+    <a href="https://github.com/diaabadr/ODC-Managing-Website/issues">Request Feature</a>
   </p>
 </div>
 
 
   </ol>
 </details>
-
-<!-- ABOUT THE PROJECT -->
-
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
 
 ### Built With
 
