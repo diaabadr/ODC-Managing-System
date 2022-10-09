@@ -26,11 +26,7 @@
   </ol>
 </details>
 
-### Built With
 
-> - Express JS
-> - MongoDB
-> - REST APIs
 
 
 
@@ -38,7 +34,7 @@
 
 <!-- USAGE EXAMPLES -->
 
-## Usage
+## Project Usage
 
 ### This project has 2 Interfaces.
 #### 1. Admin Interface  
@@ -58,7 +54,11 @@ This interface gives the Student these features.
 >- take skill assesment to gain this skill on his profile.
 
 
-## Roadmap
+### Built With
+
+> - Express JS
+> - MongoDB
+> - REST APIs
 
 
 
@@ -69,9 +69,7 @@ This interface gives the Student these features.
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://www.linkedin.com/in/diaa-badr-b164661b9/"><img src="./public/images/dada.jpg" width="100px;" alt="Diaa Badr"/><br /><sub><b>Diaa Badr</b></sub></a><br /><a href="https://github.com/diaabadr/ODC-Managing-Website/commits?author=diaabadr" title="Code">💻</a></td>
-  </td>
+
    
 
 
