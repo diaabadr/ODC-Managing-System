@@ -36,7 +36,7 @@
 
 <!-- USAGE EXAMPLES -->
 ## About the project
->- The project was made on Hacathon supported by Orange digital center and Instant.
+>- The project was made on Hackathon supported by Orange digital center and Instant.
 >- It's an individual Project.
 
 ## Project Usage
