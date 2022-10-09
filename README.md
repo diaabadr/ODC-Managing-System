@@ -14,7 +14,6 @@
 <h3 align="center" >ODC-Managing-Website</h3>
   <p align="center">
   Website for Managing Orange Digital Center Courses
-    <br />
 
     <br />
     <br />
