@@ -19,7 +19,7 @@
     <br />
     <a href="https://github.com/diaabadr/ODC-Managing-Website/issues">Report Bug</a>
     <br />
-    <br />
+
     <a href="https://github.com/diaabadr/ODC-Managing-Website/issues">Request Feature</a>
     <br />
   </p>
