@@ -29,7 +29,7 @@ const main_page = async function (req, res, next) {
 };
 
 const enroll_course = async (req, res) => {
-  const { id } = req.body;
+  const id  = req.params.id;
   const course = await Courses.findById(id);
   res.status(201).json({
     course_id: course._id,
@@ -47,7 +47,8 @@ const take_quiz = async (req, res) => {
 };
 
 const submit_quiz = async (req, res) => {
-  let { course_id, skill, quiz_id } = req.body;
+  const quiz_id=req.parmas.id;
+  let { course_id, skill } = req.body;
   let { t: type } = req.query;
   if (skill) {
     const skill_quiz = await Skills.findOne({ name: skill }, { quiz: 1 });

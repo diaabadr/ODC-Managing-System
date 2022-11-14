@@ -30,7 +30,7 @@ router.get("/:id", requireAuth, main_page);
 // get new course form data (for prerequists quiz)
 router.post("/newcourseform", requireAuth, new_courses_form);
 
-// feature add course
+// add course
 router.post("/addcourse", requireAuth, add_course);
 
 // get new skill form data (quizes available and )
@@ -43,19 +43,19 @@ router.post("/addskill", requireAuth, add_skill);
 router.post("/addquiz", requireAuth, add_quiz);
 
 // get students info
-router.post("/students", requireAuth, students_data);
+router.get("/students", requireAuth, students_data);
 
 // get all info of the student
-router.post("/studentinfo", requireAuth, all_student_info);
+router.get("/studentinfo/:id", requireAuth, all_student_info);
 
 // get courses info
-router.post("/courses", requireAuth, courses_data);
+router.get("/courses", requireAuth, courses_data);
 
 // adding supplier
 router.post("/addsupplier", requireAuth, add_supplier);
 
 // form for suppliers
-router.post("/loadsuppliers", requireAuth, load_suppliers);
+router.get("/loadsuppliers", requireAuth, load_suppliers);
 
 // pay money for a supplier
 router.post("/paysupplier", requireAuth, pay_supplier);
