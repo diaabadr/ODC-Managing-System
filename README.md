@@ -17,9 +17,9 @@
 
 <br />
     <br />
-    <a href="https://github.com/diaabadr/ODC-Managing-Website/issues">Report Bug</a>
+    <a href="https://github.com/diaabadr/ODC-Managing-System/issues">Report Bug</a>
     <br />
-    <a href="https://github.com/diaabadr/ODC-Managing-Website/issues">Request Feature</a>
+    <a href="https://github.com/diaabadr/ODC-Managing-System/issues">Request Feature</a>
     <br />
   </p>
 </div>
@@ -38,7 +38,7 @@
 ## About the project
 >- The project is implemented in Hackathon with the support of Orange Digital Center and Instant.
 >- It's an individual Project.
-
+>- The Project got one of the top 5 Projects on the Hackathon.
 ## Project Usage
 
 ### This project has 2 Interfaces.
