@@ -28,7 +28,7 @@ const most_matching_students = async (req, res) => {
 };
 
 const recommend_student = async (req, res) => {
-  const id = req.body.id;
+  const id = req.params.id;
   const text = req.body.text;
   const { email } = await User.findById(id, { email: 1 });
   var mailOptions = {

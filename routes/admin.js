@@ -28,13 +28,13 @@ const {
 router.get("/:id", requireAuth, main_page);
 
 // get new course form data (for prerequists quiz)
-router.post("/newcourseform", requireAuth, new_courses_form);
+router.get("/newcourseform", requireAuth, new_courses_form);
 
 // add course
 router.post("/addcourse", requireAuth, add_course);
 
 // get new skill form data (quizes available and )
-router.post("/newskillform", requireAuth, new_skill_form);
+router.get("/newskillform", requireAuth, new_skill_form);
 
 // feature add new skill
 router.post("/addskill", requireAuth, add_skill);
@@ -64,6 +64,6 @@ router.post("/paysupplier", requireAuth, pay_supplier);
 router.post("/recommend", requireAuth, most_matching_students);
 
 // send mail to student about the job
-router.post("/recommendstudent", requireAuth, recommend_student);
+router.get("/recommendstudent/:id", requireAuth, recommend_student);
 
 module.exports = router;
